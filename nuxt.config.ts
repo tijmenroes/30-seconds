@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   ssr: false,
 
   app: {
-    baseURL: '/30seconds',
+    baseURL: '/30-seconds',
     buildAssetsDir: '/assets/'
   },
 
