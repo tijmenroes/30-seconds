@@ -37,7 +37,8 @@
       <UButton
         v-for="word in rndWordList"
         :key="word"
-        :color="selectedWords.includes(word) ? 'primary' : 'neutral'"
+        color="neutral"
+        :class="selectedWords.includes(word) ? 'brightness-50' : ''"
         size="xl"
         @click="handleWordClick(word)"
       >
@@ -49,6 +50,7 @@
         color="secondary"
         size="xl"
         icon="i-lucide-save"
+        variant="subtle"
         @click="submitScore"
         >Submit</UButton
       >
