@@ -1,8 +1,21 @@
 <template>
   <div class="p-4">
-    <h1 class="text-3xl font-bold pb-3">Settings</h1>
+    <div class="flex items-center justify-between gap-3 pb-3">
+      <h1 class="text-3xl font-bold">Settings</h1>
 
-    <UButton @click="wordsStore.checkWords">Check words</UButton>
+      <UButton
+        icon="i-lucide-play"
+        size="lg"
+        trailing-icon="i-lucide-arrow-right"
+        @click="startGame"
+      >
+        Start game
+      </UButton>
+    </div>
+
+    <DevOnly>
+      <UButton @click="wordsStore.checkWords">Check words</UButton>
+    </DevOnly>
 
     <div class="flex flex-col gap-4">
       <h2 class="text-2xl font-bold">Custom words</h2>
@@ -36,17 +49,24 @@
 </template>
 
 <script setup lang="ts">
-import { useWordsStore } from "~/stores/words";
+import { useWordsStore } from '~/stores/words'
 
-const wordsStore = useWordsStore();
-const disabledWordPacks = computed(() => wordsStore.disabledWordPacks);
+const router = useRouter()
+const wordsStore = useWordsStore()
+const disabledWordPacks = computed(() => wordsStore.disabledWordPacks)
 
-const customWords = ref<string>();
+const customWords = ref<string>(wordsStore.customWords.join('\n'))
 const customWordsCounter = computed(
-  () => customWords.value?.split("\n").length || 0,
-);
+  () => customWords.value?.split('\n').length || 0
+)
 
 function setCustomWords() {
-  wordsStore.setCustomWords(customWords.value?.split("\n") || []);
+  wordsStore.setCustomWords(customWords.value?.split('\n') || [])
+}
+
+function startGame() {
+  // Ensure latest textarea value is saved before leaving this page.
+  setCustomWords()
+  router.push('/game')
 }
 </script>
