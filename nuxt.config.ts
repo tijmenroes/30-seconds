@@ -10,6 +10,15 @@ export default defineNuxtConfig({
 
   ssr: false,
 
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://tijmenroes.github.io/30-seconds',
+      siteName: '30 Seconds',
+      siteDescription:
+        'A game where you have 30 seconds to guess as many words as possible.'
+    }
+  },
+
   app: {
     baseURL: '/30-seconds',
     buildAssetsDir: '/assets/'
